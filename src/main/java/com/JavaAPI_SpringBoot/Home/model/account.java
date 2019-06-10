@@ -1,6 +1,5 @@
 package com.JavaAPI_SpringBoot.Home.model;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Builder;
@@ -11,8 +10,6 @@ import lombok.Data;
 @Document(collection = "accounts")
 public class account {
 	
-	@Id      //Primary key is ID
-	private int    id;
 	private String username;
 	private String password;
 	

@@ -26,7 +26,7 @@ public class userServices {
 	// creating a vector of Report, initial size is 100
 	Vector<account> report = new Vector(100);
 
-//	MongoClientURI uri = new MongoClientURI("mongodb+srv://tushar:<password>@cluster0-nstwh.mongodb.net/test?retryWrites=true&w=majority");
+//	MongoClientURI uri = new MongoClientURI("mongo.......");
 //	MongoClient mongoClient = new MongoClient(uri);
 //	MongoDatabase database = mongoClient.getDatabase("users");
 //	MongoCollection<Document> collection = database.getCollection("accounts");
@@ -78,12 +78,10 @@ public class userServices {
 	
 	
 	@RequestMapping(method = RequestMethod.POST, value= "/createAccount")
-	public response createAccount(@RequestBody Document Account) {
+	public response createAccount(@RequestBody account Account) {
 		
-		System.out.println(Account);
-		System.out.println(documents.size());
-		documents.add(Account);
-		System.out.println(documents.size());
+		System.out.println(accountRepo);
+		accountRepo.save(Account);
 		Response = new response(true, "success");
 		return Response;
 	}
