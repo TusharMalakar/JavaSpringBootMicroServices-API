@@ -12,5 +12,4 @@ public class JavaApiSpringBootApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }
