@@ -2,11 +2,11 @@ package com.JavaAPI_SpringBoot.Home.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@Builder
+@AllArgsConstructor
 @Document(collection = "accounts")
 public class account {
 	
