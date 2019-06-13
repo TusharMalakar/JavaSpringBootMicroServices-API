@@ -8,6 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.JavaAPI_SpringBoot.Home.model.JwtUser;
 import com.JavaAPI_SpringBoot.Home.security.JwtGenerator;
 
+/**
+ * Used by {@link ExceptionTranslationFilter} to commence an authentication scheme.
+ *
+ * @author Tushar Malakar
+ */
+
+
 @RestController
 @RequestMapping("/token")
 public class token {

@@ -6,6 +6,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Used by {@link ExceptionTranslationFilter} to commence an authentication scheme.
+ *
+ * @author Tushar Malakar
+ */
+
+
 public class JwtUserDetails implements UserDetails {
 
     private String userName;

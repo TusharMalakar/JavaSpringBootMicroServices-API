@@ -16,6 +16,13 @@ import com.JavaAPI_SpringBoot.Home.model.JwtUserDetails;
 
 import java.util.List;
 
+/**
+ * Used by {@link ExceptionTranslationFilter} to commence an authentication scheme.
+ *
+ * @author Tushar Malakar
+ */
+
+
 @Component
 public class JwtAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 

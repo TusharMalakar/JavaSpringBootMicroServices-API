@@ -10,7 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.JavaAPI_SpringBoot.Home.model.account;
 import com.JavaAPI_SpringBoot.Home.model.response;
 import com.JavaAPI_SpringBoot.Home.repository.accountRepository;
-;
+
+/**
+ * Used by {@link ExceptionTranslationFilter} to commence an authentication scheme.
+ *
+ * @author Tushar Malakar
+ */
+
 
 
 @RestController

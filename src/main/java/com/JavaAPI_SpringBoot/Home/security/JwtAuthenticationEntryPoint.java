@@ -9,6 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Used by {@link ExceptionTranslationFilter} to commence an authentication scheme.
+ *
+ * @author Tushar Malakar
+ */
+
+
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override

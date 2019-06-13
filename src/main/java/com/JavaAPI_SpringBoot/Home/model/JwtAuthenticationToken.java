@@ -2,6 +2,13 @@ package com.JavaAPI_SpringBoot.Home.model;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+/**
+ * Used by {@link ExceptionTranslationFilter} to commence an authentication scheme.
+ *
+ * @author Tushar Malakar
+ */
+
+
 public class JwtAuthenticationToken extends UsernamePasswordAuthenticationToken{
 
 	private String token;

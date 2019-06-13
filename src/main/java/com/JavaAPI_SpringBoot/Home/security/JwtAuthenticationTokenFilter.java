@@ -13,6 +13,11 @@ import com.JavaAPI_SpringBoot.Home.model.JwtAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 
+/**
+ * Used by {@link ExceptionTranslationFilter} to commence an authentication scheme.
+ *
+ * @author Tushar Malakar
+ */
 
 
 public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessingFilter {

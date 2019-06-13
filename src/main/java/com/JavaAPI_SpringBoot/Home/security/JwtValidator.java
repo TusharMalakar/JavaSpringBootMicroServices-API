@@ -5,6 +5,13 @@ import io.jsonwebtoken.Claims;
 import org.springframework.stereotype.Component;
 import com.JavaAPI_SpringBoot.Home.model.JwtUser;
 
+/**
+ * Used by {@link ExceptionTranslationFilter} to commence an authentication scheme.
+ *
+ * @author Tushar Malakar
+ */
+
+
 @Component
 public class JwtValidator {
 
