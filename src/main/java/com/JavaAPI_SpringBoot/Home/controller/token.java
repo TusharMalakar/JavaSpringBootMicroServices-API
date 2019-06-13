@@ -15,7 +15,7 @@ public class token {
 
     private JwtGenerator jwtGenerator;
 
-    public TokenController(JwtGenerator jwtGenerator) {
+    public token(JwtGenerator jwtGenerator) {
         this.jwtGenerator = jwtGenerator;
     }
 
