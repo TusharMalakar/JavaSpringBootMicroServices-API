@@ -10,19 +10,18 @@ import com.JavaAPI_SpringBoot.Home.security.JwtGenerator;
 
 /**
  * Used by {@link ExceptionTranslationFilter} to commence an authentication scheme.
- *
  * @author Tushar Malakar
  */
 
 
 @RestController
 @RequestMapping("/token")
-public class token {
+public class tokenController {
 
 
     private JwtGenerator jwtGenerator;
 
-    public token(JwtGenerator jwtGenerator) {
+    public tokenController(JwtGenerator jwtGenerator) {
         this.jwtGenerator = jwtGenerator;
     }
 

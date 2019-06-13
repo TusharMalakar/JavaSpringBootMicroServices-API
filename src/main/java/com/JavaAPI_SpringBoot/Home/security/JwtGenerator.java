@@ -10,7 +10,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 /**
  * Used by {@link ExceptionTranslationFilter} to commence an authentication scheme.
- *
  * @author Tushar Malakar
  */
 
@@ -30,7 +29,7 @@ public class JwtGenerator {
 
         return Jwts.builder()
                 .setClaims(claims)
-                .signWith(SignatureAlgorithm.HS512, "youtube")
+                .signWith(SignatureAlgorithm.HS512, "THISanSECRETkeY")
                 .compact();
     }
 }

@@ -7,7 +7,6 @@ import com.JavaAPI_SpringBoot.Home.model.JwtUser;
 
 /**
  * Used by {@link ExceptionTranslationFilter} to commence an authentication scheme.
- *
  * @author Tushar Malakar
  */
 
@@ -16,7 +15,7 @@ import com.JavaAPI_SpringBoot.Home.model.JwtUser;
 public class JwtValidator {
 
 
-    private String secret = "youtube";
+    private String secret = "THISanSECRETkeY";
 
     public JwtUser validate(String token) {
 
