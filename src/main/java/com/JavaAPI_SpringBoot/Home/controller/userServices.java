@@ -36,7 +36,7 @@ public class userServices {
 	private response Response = new response(false, null);
 	
 	//default response
-	@RequestMapping(method = RequestMethod.GET, value="")
+	@RequestMapping(method = RequestMethod.GET, value="**/api/**")
 	public String welcomePage() {
 		String welcome = "welome to Java Microservices";
 		return welcome;
