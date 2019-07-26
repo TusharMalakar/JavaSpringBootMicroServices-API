@@ -25,7 +25,9 @@
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
 		<!--
-			adding geo-location
+			//adding geo-location
+			//https://stackoverflow.com/questions/1415851/best-way-to-get-geo-location-in-java
+			
 			<dependency>
     				<groupId>com.maxmind.geoip</groupId>
 				<artifactId>geoip-api</artifactId>
