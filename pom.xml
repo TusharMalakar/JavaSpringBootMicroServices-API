@@ -24,6 +24,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
+		<!--
+			adding geo-location
+			<dependency>
+    				<groupId>com.maxmind.geoip</groupId>
+				<artifactId>geoip-api</artifactId>
+    				<version>1.2.11</version>
+			</dependency>
+		-->
 		 <dependency>
          <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-starter-websocket</artifactId>
