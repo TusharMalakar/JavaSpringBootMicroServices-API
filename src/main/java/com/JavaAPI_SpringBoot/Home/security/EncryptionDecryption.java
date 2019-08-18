@@ -12,6 +12,7 @@ import javax.crypto.Cipher;
 
 public class EncryptionDecryption {
 	
+	static String mySecretKey = "mySecretKeyToEn&&DeCryptePass";
 	private static SecretKeySpec secretKey;
 	private static byte[] key;
 	
@@ -34,11 +35,11 @@ public class EncryptionDecryption {
     }
     
 	
-	public static String encrypt(String strToEncrypt, String secret){
+	public static String encrypt(String strToEncrypt){
 		
         try
         {
-            setKey(secret);
+            setKey(mySecretKey);
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
             return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
@@ -50,11 +51,11 @@ public class EncryptionDecryption {
         return null;
     }
 	
-	public static String decrypt(String strToDecrypt, String secret){
+	public static String decrypt(String strToDecrypt){
 		
         try
         {
-            setKey(secret);
+            setKey(mySecretKey);
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
             return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
@@ -68,27 +69,19 @@ public class EncryptionDecryption {
 	
 	
 	/***
-	 public static void main(String[] args) {
-	  
-	    final String secretKey = "ssshhhhhhhhhhh!!!!";
-	     
-	    String originalString = "myPasswordtoEncrypte";
-	    EncryptionDecryption encryptionDecryptionInstance;
-	    String encryptedString = encryptionDecryptionInstance.encrypt(originalString, secretKey) ;
-	    String decryptedString = encryptionDecryptionInstance.decrypt(encryptedString, secretKey) ;
-	     
-	    System.out.println(originalString);
-	    System.out.println(encryptedString);
-	    System.out.println(decryptedString);
-    
-    }
-    
-    
+	 public static void main(String[] args) {   
+	    String pass = "Passsword1234$@";
+		String encryptPass = EncryptionDecryption.encrypt(pass);
+		String decryptPass = EncryptionDecryption.decrypt(encryptPass);
+		
+		System.out.println("Encrypted Pass : " +encryptPass);
+		System.out.println("Decrypted Pass : " +decryptPass);
+      
     Output:
-			myPasswordtoEncrypte
-			Tg2Nn7wUZOQ6Xc+1lenkZTQ9ZDf9a2/RBRiqJBCIX6o=
-			myPasswordtoEncrypte
-	 
-	***/
+			Encrypted Pass : tKgPTFlJq/rzAANF46+euA==
+			Decrypted Pass : Passsword1234$@	
+	}
 
+	***/ 
+	 
 }

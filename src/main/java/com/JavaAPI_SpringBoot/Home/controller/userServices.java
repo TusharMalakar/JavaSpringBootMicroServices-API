@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.JavaAPI_SpringBoot.Home.model.account;
 import com.JavaAPI_SpringBoot.Home.model.response;
 import com.JavaAPI_SpringBoot.Home.repository.accountRepository;
+import com.JavaAPI_SpringBoot.Home.security.EncryptionDecryption;
 
 /**
  * Used by {@link ExceptionTranslationFilter} to commence an authentication scheme.
@@ -34,6 +35,7 @@ public class userServices {
 	
 	//passing reponse on successful or faluire 
 	private response Response = new response(false, null);
+	EncryptionDecryption EncryptionDecryptionInstance = null;
 	
 	//default response
 	@RequestMapping(method = RequestMethod.GET, value="**/api/**")
