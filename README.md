@@ -1,9 +1,8 @@
 # JavaAPI_SpringBoot Micro-services :
 	It is an simple JAVA API design using Spring Boot, Tomcat and "Json Web Token (Jwt)" based authentication.  I used Amazon Web Service (AWS) and Mongodb to store my data. 
 # Licensed to the Apache Software Foundation
-# Licensed to MIT
 # Spring Security with JWT Authentication
-# JMS Messaging 
+# Secure Hash Algorithm (SHA-512)
 # Encrypting & Decrypting soft data : Salt algorithm to encrypte and decrypte
 # Mapping : @GetMapping, @PostMapping, @PutMapping and @DeleteMapping
 
