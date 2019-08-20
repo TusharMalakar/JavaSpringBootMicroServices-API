@@ -5,12 +5,12 @@
    http://maven.apache.org/xsd/maven-4.0.0.xsd">
    
    <modelVersion>4.0.0</modelVersion>
-   <groupId>com.tutorialspoint</groupId>
+   <groupId>com.JavaAPI_SpringBoot</groupId>
    <artifactId>websocketapp</artifactId>
    <version>0.0.1-SNAPSHOT</version>
    <packaging>jar</packaging>
    <name>websocketapp</name>
-   <description>Demo project for Spring Boot</description>
+   <description>Real Time Spring Boot API to manage secure HTTP request</description>
 
    <parent>
       <groupId>org.springframework.boot</groupId>
@@ -20,50 +20,69 @@
 
 	<dependencies>
 	
+		<!-- loading mongodb database -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
+		
+		<!-- loding lombok to api -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.8</version>
+			<scope>provided</scope>
+		</dependency>
+		
 		<!--
 			//adding geo-location
 			//https://stackoverflow.com/questions/1415851/best-way-to-get-geo-location-in-java
-			
-			<dependency>
-    				<groupId>com.maxmind.geoip</groupId>
-				<artifactId>geoip-api</artifactId>
-    				<version>1.2.11</version>
-			</dependency>
 		-->
+		<dependency>
+   				<groupId>com.maxmind.geoip</groupId>
+				<artifactId>geoip-api</artifactId>
+   				<version>1.2.11</version>
+		</dependency>
+		
+		
+		<!-- 
+			adding javaScript webSocket to api
+			https://www.tutorialspoint.com/spring_boot/spring_boot_web_socket
+		 -->
 		 <dependency>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-starter-websocket</artifactId>
-      </dependency>
-      <dependency>
-         <groupId>org.webjars</groupId>
-         <artifactId>webjars-locator</artifactId>
-      </dependency>
-      <dependency>
-         <groupId>org.webjars</groupId>
-         <artifactId>sockjs-client</artifactId>
-         <version>1.0.2</version>
-      </dependency>
-      
-      <dependency>
-         <groupId>org.webjars</groupId>
-         <artifactId>stomp-websocket</artifactId>
-         <version>2.3.3</version>
-      </dependency>
-      <dependency>
-         <groupId>org.webjars</groupId>
-         <artifactId>bootstrap</artifactId>
-         <version>3.3.7</version>
-      </dependency>
-      
-      <dependency>
-         <groupId>org.webjars</groupId>
-         <artifactId>jquery</artifactId>
-         <version>3.1.0</version>
-      </dependency>
+	         <groupId>org.springframework.boot</groupId>
+	         <artifactId>spring-boot-starter-websocket</artifactId>
+	      </dependency>
+	      
+	      <!-- webJar locator -->
+	      <dependency>
+	         <groupId>org.webjars</groupId>
+	         <artifactId>webjars-locator</artifactId>
+	      </dependency>
+	      <dependency>
+	         <groupId>org.webjars</groupId>
+	         <artifactId>sockjs-client</artifactId>
+	         <version>1.0.2</version>
+	      </dependency>
+	      
+	      <!-- loads stomp websocket  -->
+	      <dependency>
+	         <groupId>org.webjars</groupId>
+	         <artifactId>stomp-websocket</artifactId>
+	         <version>2.3.3</version>
+	      </dependency>
+	      <dependency>
+	         <groupId>org.webjars</groupId>
+	         <artifactId>bootstrap</artifactId>
+	         <version>3.3.7</version>
+	      </dependency>
+	      
+	      <dependency>
+	         <groupId>org.webjars</groupId>
+	         <artifactId>jquery</artifactId>
+	         <version>3.1.0</version>
+	      </dependency>
+	      <!-- End of webSocket -->
 		
 		
 		<dependency>
@@ -75,12 +94,14 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<!-- java messaging api -->
 		<dependency>
 		    <groupId>javax.jms</groupId>
 		    <artifactId>javax.jms-api</artifactId>
 		    <version>2.0.1</version>
 		</dependency>
 		
+		<!-- json web token dependency -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
@@ -92,6 +113,8 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- spring security  -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
@@ -111,6 +134,5 @@
          </plugin>
       </plugins>
    </build>
-
 
 </project>

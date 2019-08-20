@@ -13,7 +13,10 @@ Endpoints:
 
 	1.  GET request to log in to exiting account.
 			   
-		domain + user/login?username=testsuer1&password=password
+		
+	   If you run on loacalhost:8080
+	   http://localhost:8080/user/login?username=testsuer1&password=password
+	 
 		
 		return {"success":true,"token":"You successfully logged in!"}
 			   or {"success":false,"token":"error message"}

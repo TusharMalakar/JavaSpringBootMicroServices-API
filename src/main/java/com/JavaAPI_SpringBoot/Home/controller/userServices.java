@@ -38,13 +38,21 @@ public class userServices {
 	EncryptionDecryption EncryptionDecryptionInstance = null;
 	
 	//default response
-	@RequestMapping(method = RequestMethod.GET, value="**/api/**")
+	/**
+	 * If you run on loacalhost:8080
+	 * http://localhost:8080
+	 * */
+	@RequestMapping(method = RequestMethod.GET, value="")
 	public String welcomePage() {
 		String welcome = "welome to Java Microservices";
 		return welcome;
 	}
 	
-	//user/login?username=testsuer1&password=password
+	/**
+	 * If you run on loacalhost:8080
+	 * http://localhost:8080/user/login?username=testsuer1&password=password
+	 * */
+	
 	@RequestMapping(method = RequestMethod.GET, value ="/user/login")
 	public response login_endpoint(@RequestParam String username, @RequestParam String password) { 
 		
