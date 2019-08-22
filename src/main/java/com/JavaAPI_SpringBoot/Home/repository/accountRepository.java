@@ -11,7 +11,7 @@ import com.JavaAPI_SpringBoot.Home.model.account;
 
 
 public interface accountRepository extends MongoRepository<account, Integer>{
-	
+	public account findByUsername(String username);
 }
 
 

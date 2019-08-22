@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.JavaAPI_SpringBoot.Home.model.account;
 import com.JavaAPI_SpringBoot.Home.model.response;
+import com.JavaAPI_SpringBoot.Home.model.services.accountServices;
 import com.JavaAPI_SpringBoot.Home.repository.accountRepository;
 import com.JavaAPI_SpringBoot.Home.security.EncryptionDecryption;
 
@@ -32,6 +33,7 @@ public class userController {
 	
 	@Autowired
 	private accountRepository accountRepo;
+	private accountServices accountService;
 	
 	//passing reponse on successful or faluire 
 	private response Response = new response(false, null);
@@ -97,13 +99,22 @@ public class userController {
 	}
 	
 	
-	@RequestMapping(method = RequestMethod.GET, value= "getAccountByName")
-	public account getAccountByName(){
-		for(int i=0; i < accountRepo.findAll().size(); i++) {
-			System.out.println(accountRepo.findAll().get(i).getUsername());
-		}
-		return accountRepo.findAll().get(0);
+	@RequestMapping(method = RequestMethod.GET, value = "getAccountByName")
+	public account getAccountByName(@RequestParam String username) { 
+		
+		return accountService.getByUsername(username);
 	}
 	
+	@RequestMapping(method = RequestMethod.PUT, value = "updateUser")
+	public account updateUser(@RequestParam String username, @RequestParam String password) { 
+		
+		return accountService.updateUser(username, password);
+	}
+	
+	@RequestMapping(method = RequestMethod.DELETE, value = "deleteUser")
+	public void deleteUser(@RequestParam String username) { 
+		
+		accountService.delete(username);
+	}
 	
 }
