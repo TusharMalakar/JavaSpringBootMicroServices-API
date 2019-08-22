@@ -82,11 +82,20 @@ public class userServices {
 	@RequestMapping(method = RequestMethod.POST, value= "/createAccount")
 	public response createAccount(@RequestBody account Account) {
 		
-		System.out.println(Account);
-		accountRepo.save(Account);
-		Response = new response(true, "success");
+		for(int i=0; i< accountRepo.findAll().size(); i++){
+			if(!Account.getUsername().equals(accountRepo.findAll().get(i).getUsername())) {
+				accountRepo.save(Account);
+				Response = new response(true, "lkljalkjflakjflkajlkfja");
+			}
+			else {
+				Response = new response(false, "User already exist");
+				
+			}
+		}
 		return Response;
+	
 	}
+	
 	
 	@RequestMapping(method = RequestMethod.GET, value= "getAccountByName")
 	public account getAccountByName(){
