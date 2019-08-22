@@ -21,7 +21,7 @@ import com.JavaAPI_SpringBoot.Home.security.EncryptionDecryption;
 
 
 @RestController
-public class userServices {
+public class userController {
 	
 //	MongoClientURI uri = new MongoClientURI( "mongodbites=true&w=majority");
 //	MongoClient mongoClient = new MongoClient(uri);
@@ -59,7 +59,7 @@ public class userServices {
 		for(int i=0; i< accountRepo.findAll().size(); i++){	
 			
 			if(accountRepo.findAll().get(i).getUsername().equals(username) && accountRepo.findAll().get(i).getPassword().equals(password)) {
-				System.out.println(accountRepo.findAll().get(i).getUsername());
+				//System.out.println(accountRepo.findAll().get(i).getUsername());
 				Response = new response(true, "You successfully logged in!" );
 			}
 			
