@@ -59,6 +59,7 @@ public class userServices {
 		for(int i=0; i< accountRepo.findAll().size(); i++){	
 			
 			if(accountRepo.findAll().get(i).getUsername().equals(username) && accountRepo.findAll().get(i).getPassword().equals(password)) {
+				System.out.println(accountRepo.findAll().get(i).getUsername());
 				Response = new response(true, "You successfully logged in!" );
 			}
 			
@@ -94,7 +95,6 @@ public class userServices {
 		}
 		return accountRepo.findAll().get(0);
 	}
-	
 	
 	
 }
