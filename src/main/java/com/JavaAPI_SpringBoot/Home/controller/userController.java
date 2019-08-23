@@ -111,8 +111,7 @@ public class userController {
 		return accountEntity;
 	}
 	
-	
-	
+
 	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteUser")
 	public void deleteUser(@RequestParam String username) { 
 		
