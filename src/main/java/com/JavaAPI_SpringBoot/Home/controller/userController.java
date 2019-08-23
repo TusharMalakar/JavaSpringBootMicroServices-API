@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.JavaAPI_SpringBoot.Home.model.account;
 import com.JavaAPI_SpringBoot.Home.model.response;
-import com.JavaAPI_SpringBoot.Home.model.services.accountServices;
 import com.JavaAPI_SpringBoot.Home.repository.accountRepository;
 import com.JavaAPI_SpringBoot.Home.security.EncryptionDecryption;
 
@@ -33,7 +32,6 @@ public class userController {
 	
 	@Autowired
 	private accountRepository accountRepo;
-	private accountServices accountService;
 	
 	//passing reponse on successful or faluire 
 	private response Response = new response(false, null);
@@ -47,6 +45,7 @@ public class userController {
 	@RequestMapping(method = RequestMethod.GET, value="")
 	public String welcomePage() {
 		String welcome = "welome to Java Microservices";
+		System.out.println(accountRepo.findAll().size());
 		return welcome;
 	}
 	
@@ -69,13 +68,9 @@ public class userController {
 				if(!accountRepo.findAll().get(i).getPassword().equals(password)) {
 					Response = new response(false,"password didn't match!");
 				}
-				
-//				else{
-//					Response = new response(false,"Username doesn't exit!");
-//				}
-				
 			}
 		} 
+		System.out.println(accountRepo.findAll().size());
 		return Response;
 	}
 			
@@ -94,27 +89,41 @@ public class userController {
 				
 			}
 		}
+		System.out.println(accountRepo.findAll().size());
 		return Response;
 	
 	}
 	
 	
-	@RequestMapping(method = RequestMethod.GET, value = "getAccountByName")
+	@RequestMapping(method = RequestMethod.GET, value = "/getAccountByName")
 	public account getAccountByName(@RequestParam String username) { 
 		
-		return accountService.getByUsername(username);
+		System.out.println(accountRepo.findAll().size());
+		return accountRepo.findByUsername(username);
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT, value = "updateUser")
+	@RequestMapping(method = RequestMethod.PUT, value = "/updateUser")
 	public account updateUser(@RequestParam String username, @RequestParam String password) { 
 		
-		return accountService.updateUser(username, password);
+		account accountEntity = accountRepo.findByUsername(username);
+		accountEntity.setPassword(password);
+		accountEntity.setUsername(username);
+		return accountEntity;
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE, value = "deleteUser")
+	
+	
+	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteUser")
 	public void deleteUser(@RequestParam String username) { 
 		
-		accountService.delete(username);
+		account accountEntity = accountRepo.findByUsername(username);
+		accountRepo.delete(accountEntity);
+	}
+	
+	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteAllUsers")
+	public void deleteAllUsers() { 
+	
+		accountRepo.deleteAll();
 	}
 	
 }
