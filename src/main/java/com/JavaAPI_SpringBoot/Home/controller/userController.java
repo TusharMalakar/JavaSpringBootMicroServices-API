@@ -106,17 +106,21 @@ public class userController {
 	public account updateUser(@RequestParam String username, @RequestParam String password) { 
 		
 		account accountEntity = accountRepo.findByUsername(username);
-		accountEntity.setPassword(password);
-		accountEntity.setUsername(username);
+		if(accountEntity!=null)
+			accountEntity.setPassword(password);
+			accountEntity.setUsername(username);
+			accountRepo.save(accountEntity);
 		return accountEntity;
 	}
 	
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteUser")
-	public void deleteUser(@RequestParam String username) { 
+	public account deleteUser(@RequestParam String username) { 
 		
 		account accountEntity = accountRepo.findByUsername(username);
 		accountRepo.delete(accountEntity);
+		
+		return accountEntity;
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteAllUsers")
