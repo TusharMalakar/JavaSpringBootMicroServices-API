@@ -99,19 +99,19 @@ public class userController {
 	}
 	
 	
-	@RequestMapping(method = RequestMethod.GET, value = "getAccountByName")
+	@RequestMapping(method = RequestMethod.GET, value = "/getAccountByName")
 	public account getAccountByName(@RequestParam String username) { 
 		
 		return accountService.getByUsername(username);
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT, value = "updateUser")
+	@RequestMapping(method = RequestMethod.PUT, value = "/updateUser")
 	public account updateUser(@RequestParam String username, @RequestParam String password) { 
 		
 		return accountService.updateUser(username, password);
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE, value = "deleteUser")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteUser")
 	public void deleteUser(@RequestParam String username) { 
 		
 		accountService.delete(username);
