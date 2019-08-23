@@ -24,7 +24,7 @@ Endpoints:
 	
 	2.  POST request to create a new account.
 		
-		domain + /createAccount + 	token + 
+		domain + /createAccount +  
 								{
 									"username" : "testuser41",
 									"password" : "password"
