@@ -1,5 +1,6 @@
 package com.JavaAPI_SpringBoot.Home.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -17,8 +18,17 @@ import lombok.Data;
 @Document(collection = "accounts")
 public class account {
 	
+	@Id
+	private String _id;
 	private String username;
 	private String password;
+	
+	public String getID() {
+		return _id;
+	}
+	public void setID(String _id) {
+		this._id = _id;
+	}
 	
 	public String getUsername() {
 		return username;
@@ -35,7 +45,8 @@ public class account {
 	
 	@Override
 	public String toString() {
-		return "account [username=" + username + ", password=" + password + "]";
+		return "account [_id=" + _id + ", username=" + username + ", password=" + password + "]";
 	}
+	
 
 }
