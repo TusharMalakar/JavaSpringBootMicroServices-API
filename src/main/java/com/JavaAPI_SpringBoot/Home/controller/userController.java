@@ -54,18 +54,19 @@ public class userController {
 	 * http://localhost:8080/user/login?username=testsuer1&password=password
 	 * */
 	
-	@RequestMapping(method = RequestMethod.GET, value ="/user/login")
+	@RequestMapping(method = RequestMethod.GET, value ="/login")
 	public response login_endpoint(@RequestParam String username, @RequestParam String password) { 
 		
 		for(int i=0; i< accountRepo.findAll().size(); i++){	
 			
-			if(accountRepo.findAll().get(i).getUsername().equals(username) && accountRepo.findAll().get(i).getPassword().equals(password)) {
+			if(accountRepo.findAll().get(i).getUsername().equals(username) 
+					&& EncryptionDecryptionInstance.decrypt(accountRepo.findAll().get(i).getPassword()).equals(password)) {
 				//System.out.println(accountRepo.findAll().get(i).getUsername());
 				Response = new response(true, "You successfully logged in!" );
 			}
 			
 			else {		
-				if(!accountRepo.findAll().get(i).getPassword().equals(password)) {
+				if(!EncryptionDecryptionInstance.decrypt(accountRepo.findAll().get(i).getPassword()).equals(password)) {
 					Response = new response(false,"password didn't match!");
 				}
 			}
@@ -77,12 +78,14 @@ public class userController {
 	
 	
 	@RequestMapping(method = RequestMethod.POST, value= "/createAccount")
-	public response createAccount(@RequestBody account Account) {
+	public response createAccount(@RequestParam String username, @RequestParam String password) {
 		
 		for(int i=0; i< accountRepo.findAll().size(); i++){
-			if(!Account.getUsername().equals(accountRepo.findAll().get(i).getUsername())) {
+			if(!username.equals(accountRepo.findAll().get(i).getUsername())) {
+				String encrytedPass = EncryptionDecryptionInstance.encrypt(password);
+				account Account = new account(username, encrytedPass);
 				accountRepo.save(Account);
-				Response = new response(true, "lkljalkjflakjflkajlkfja");
+				Response = new response(true, "A new account has been created");
 			}
 			else {
 				Response = new response(false, "User already exist");

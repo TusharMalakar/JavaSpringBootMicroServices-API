@@ -5,14 +5,6 @@ public class message {
 	private String [] recipient;
 	private String data;
 	
-	//constructor
-		public message(String sender, String recipient [], String data) {
-			
-			this.sender    = sender;
-			this.recipient = recipient;
-			this.data      = data;
-		}
-	
 	//accessors and mutators
 	public String getSender() {
 		return sender;

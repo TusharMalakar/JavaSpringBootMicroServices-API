@@ -1,4 +1,4 @@
-package com.JavaAPI_SpringBoot.Home.Alogorithms;
+package com.JavaAPI_SpringBoot.Home.Services;
 
 public class RegularExpression {
 

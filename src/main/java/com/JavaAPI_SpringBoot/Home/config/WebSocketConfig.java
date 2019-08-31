@@ -19,7 +19,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
 	//adding endpoint to stomp
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry stompEndpointRegistry) {
-		stompEndpointRegistry.addEndpoint("/webSocketMessagging")
+		stompEndpointRegistry.addEndpoint("/webSocket")
 	     .withSockJS();
 	}
 
@@ -29,7 +29,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
 		registry.enableSimpleBroker("/topic");
 		
 		//prefix for the endpoint
-		registry.setApplicationDestinationPrefixes("/tushar");
+		registry.setApplicationDestinationPrefixes("/app");
 	}
 	
 }
