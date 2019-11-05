@@ -1,5 +1,7 @@
 package com.JavaAPI_SpringBoot.Home.model;
 
+import java.util.Calendar;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -22,11 +24,13 @@ public class account {
 	private String _id;
 	private String username;
 	private String password;
+	private String cookie;
 	
 	//default constructor
 	public account() {
 		this.username = "";
 		this.password = "";
+		this.cookie = null;
 	}
 	
 	//parameterized constructor
@@ -35,26 +39,34 @@ public class account {
 		this.password = password;
 	}
 	
-	public String getID() {
-		return _id;
-	}
+	
 	public void setID(String _id) {
 		this._id = _id;
 	}
-	
-	public String getUsername() {
-		return username;
+	public void setCookie(String cookie) {
+		this.cookie = cookie;
 	}
 	public void setUsername(String username) {
 		this.username = username;
-	}
-	public String getPassword() {
-		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
 	
+	
+	public String getID() {
+		return _id;
+	}
+	public String getUsername() {
+		return username;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	public String getCookie() {
+		return cookie;
+	}
 	@Override
 	public String toString() {
 		return "account [_id=" + _id + ", username=" + username + ", password=" + password + "]";

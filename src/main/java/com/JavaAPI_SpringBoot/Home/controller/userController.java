@@ -107,7 +107,7 @@ public class userController {
 	}
 	
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/updateUser")
+	@RequestMapping(method = RequestMethod.PUT, value = "/update_password")
 	public response updateUser(@RequestBody account accountBody) { 
 		String username = accountBody.getUsername();
 		String password = accountBody.getPassword();
@@ -116,10 +116,10 @@ public class userController {
 		
 		account accountEntity = accountRepo.findByUsername(username);
 		if(accountEntity!=null) {
-			accountEntity.setPassword(password);
+			accountEntity.setPassword(EncryptionDecryptionInstance.encrypt(password));
 			accountEntity.setUsername(username);
 			accountRepo.save(accountEntity);
-			Response = new response(true, "user accout updated successfully");
+			Response = new response(true, "user account updated successfully");
 		}
 		else {Response = new response(false, "User does not exist");}
 		
