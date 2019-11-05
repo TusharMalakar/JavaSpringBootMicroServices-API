@@ -11,11 +11,11 @@
 
 Endpoints:
 	
-	0. Welocome page:
+	0. Welocome page:['GET']
 		loacalhost:8080
 		return/response :  welome to Java Microservices {numberOfDocuments}.
 
-	1.  GET request to log in to exiting account.
+	1.  GET request to log in to exiting account:['GET']
 			   
 		
 	   If you run on loacalhost:8080
@@ -25,7 +25,7 @@ Endpoints:
 			   or {"success":false,"token":"error message"}
 	
 	
-	2.  POST request to create a new account.
+	2.  POST request to create a new account:['POST']
 		
 		http://localhost:8080/createAccount 
 			 accountBody =>  {
@@ -38,6 +38,13 @@ Endpoints:
 			}
 
 		
-	3. find account by username:
-		http://localhost:8080/getAccountByName?username=testuser1
-		return : {"username":"testuser1","password":"XOOOCt6lVT39knLfQ5iqnw==","id":"5d605c50c31980306cdb0be7"}
+	3. update user password: ['PUT']
+		http://localhost:8080/update_password 
+			 accountBody =>  {
+				    	"username":"testuser1",
+				    	"password":"new_passowrd"
+			    		}
+			return/response => {
+				"success": true,
+			        "token": "password was successfully changed"
+			}
