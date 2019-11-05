@@ -23,10 +23,18 @@ public class account {
 	private String username;
 	private String password;
 	
+	//default constructor
+	public account() {
+		this.username = "";
+		this.password = "";
+	}
+	
+	//parameterized constructor
 	public account(String username, String password) {
 		this.username = username;
 		this.password = password;
 	}
+	
 	public String getID() {
 		return _id;
 	}

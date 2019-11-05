@@ -38,83 +38,94 @@ public class userController {
 	EncryptionDecryption EncryptionDecryptionInstance = null;
 	
 	//default response
-	/**
-	 * If you run on loacalhost:8080
-	 * http://localhost:8080
-	 * */
 	@RequestMapping(method = RequestMethod.GET, value="")
 	public String welcomePage() {
+		/**
+		 * If you run on loacalhost:8080
+		 * http://localhost:8080
+		 * */
 		String welcome = "welome to Java Microservices";
 		System.out.println(accountRepo.findAll().size());
-		return welcome;
+		return welcome +" "+ accountRepo.findAll().size();
 	}
 	
-	/**
-	 * If you run on loacalhost:8080
-	 * http://localhost:8080/user/login?username=testsuer1&password=password
-	 * */
+	
 	
 	@RequestMapping(method = RequestMethod.GET, value ="/login")
 	public response login_endpoint(@RequestParam String username, @RequestParam String password) { 
 		
-		for(int i=0; i< accountRepo.findAll().size(); i++){	
-			
-			if(accountRepo.findAll().get(i).getUsername().equals(username) 
-					&& EncryptionDecryptionInstance.decrypt(accountRepo.findAll().get(i).getPassword()).equals(password)) {
-				//System.out.println(accountRepo.findAll().get(i).getUsername());
-				Response = new response(true, "You successfully logged in!" );
+		/**
+		 * If you run on loacalhost:8080
+		 * http://localhost:8080/login?username=testuser1&password=password
+		 * */
+		
+		if(accountRepo.findByUsername(username).getUsername().equals(username) 
+				&& EncryptionDecryptionInstance.decrypt(accountRepo.findByUsername(username).getPassword()).equals(password)) {
+			Response = new response(true, "You successfully logged in!" );
+		}
+		
+		else {		
+			if(!EncryptionDecryptionInstance.decrypt(accountRepo.findByUsername(username).getPassword()).equals(password)) {
+				Response = new response(false,"password didn't match!");
 			}
-			
-			else {		
-				if(!EncryptionDecryptionInstance.decrypt(accountRepo.findAll().get(i).getPassword()).equals(password)) {
-					Response = new response(false,"password didn't match!");
-				}
-			}
-		} 
-		System.out.println(accountRepo.findAll().size());
+		}
 		return Response;
 	}
 			
 	
 	
 	@RequestMapping(method = RequestMethod.POST, value= "/createAccount")
-	public response createAccount(@RequestParam String username, @RequestParam String password) {
+	public response createAccount(@RequestBody account accountBody) {
+		/**
+		 * http://localhost:8080/createAccount 
+			 accountBody =>  {
+				    	"username":"testuser1",
+				    	"password":"password"
+			    		}
+					return/response => {
+					    "success": true,
+					    "token": "A new account has been created"
+						}
+		 * */
 		
-		for(int i=0; i< accountRepo.findAll().size(); i++){
-			if(!username.equals(accountRepo.findAll().get(i).getUsername())) {
-				String encrytedPass = EncryptionDecryptionInstance.encrypt(password);
-				account Account = new account(username, encrytedPass);
-				accountRepo.save(Account);
-				Response = new response(true, "A new account has been created");
-			}
-			else {
-				Response = new response(false, "User already exist");
-				
-			}
+		String username = accountBody.getUsername();
+		String password = accountBody.getPassword();
+		if(username==null || password==null || username== "" || password=="") 
+		{Response = new response(false, "username or password not provided"); return Response;}
+		account accountEntity = accountRepo.findByUsername(username);
+		
+		if(accountEntity == null) {
+			String encrytedPass = EncryptionDecryptionInstance.encrypt(password);
+			account Account = new account(username, encrytedPass);
+			accountRepo.save(Account);
+			Response = new response(true, "A new account has been created");
 		}
-		System.out.println(accountRepo.findAll().size());
+		else {Response = new response(false, "User already exist");}
+	
 		return Response;
 	
 	}
 	
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/getAccountByName")
-	public account getAccountByName(@RequestParam String username) { 
-		
-		System.out.println(accountRepo.findAll().size());
-		return accountRepo.findByUsername(username);
-	}
-	
+
 	@RequestMapping(method = RequestMethod.PUT, value = "/updateUser")
-	public account updateUser(@RequestParam String username, @RequestParam String password) { 
+	public response updateUser(@RequestBody account accountBody) { 
+		String username = accountBody.getUsername();
+		String password = accountBody.getPassword();
+		if(username==null || password==null || username== "" || password=="") 
+		{Response = new response(false, "username or password not provided"); return Response;}
 		
 		account accountEntity = accountRepo.findByUsername(username);
-		if(accountEntity!=null)
+		if(accountEntity!=null) {
 			accountEntity.setPassword(password);
 			accountEntity.setUsername(username);
 			accountRepo.save(accountEntity);
-		return accountEntity;
-	}
+			Response = new response(true, "user accout updated successfully");
+		}
+		else {Response = new response(false, "User does not exist");}
+		
+		return Response; 
+		}
+	
 	
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteUser")

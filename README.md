@@ -6,17 +6,20 @@
 # Encrypting & Decrypting soft data : Salt algorithm to encrypte and decrypte
 # Mapping : @GetMapping, @PostMapping, @PutMapping and @DeleteMapping
 
-
+#==========================> TRUN ON YOUR DB<===================================
 
 
 Endpoints:
+	
+	0. Welocome page:
+		loacalhost:8080
+		return/response :  welome to Java Microservices {numberOfDocuments}.
 
 	1.  GET request to log in to exiting account.
 			   
 		
 	   If you run on loacalhost:8080
-	   http://localhost:8080/user/login?username=testsuer1&password=password
-	 
+	   http://localhost:8080/login?username=testuser1&password=password
 		
 		return {"success":true,"token":"You successfully logged in!"}
 			   or {"success":false,"token":"error message"}
@@ -24,11 +27,17 @@ Endpoints:
 	
 	2.  POST request to create a new account.
 		
-		domain + /createAccount +  
-								{
-									"username" : "testuser41",
-									"password" : "password"
-								}
-		return { "success": true, "token": "success" }
-		or     { "success": false, "token": "error message" }
+		http://localhost:8080/createAccount 
+			 accountBody =>  {
+				    	"username":"testuser1",
+				    	"password":"password"
+			    		}
+			return/response => {
+				"success": true,
+			        "token": "A new account has been created"
+			}
+
 		
+	3. find account by username:
+		http://localhost:8080/getAccountByName?username=testuser1
+		return : {"username":"testuser1","password":"XOOOCt6lVT39knLfQ5iqnw==","id":"5d605c50c31980306cdb0be7"}
