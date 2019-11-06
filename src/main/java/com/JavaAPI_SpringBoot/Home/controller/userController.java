@@ -44,9 +44,8 @@ public class userController {
 		 * If you run on loacalhost:8080
 		 * http://localhost:8080
 		 * */
-		String welcome = "welome to Java Microservices";
-		System.out.println(accountRepo.findAll().size());
-		return welcome +" "+ accountRepo.findAll().size();
+		//System.out.println(accountRepo.findAll().size());
+		return "Welome to Java Microservices";
 	}
 	
 	
@@ -58,24 +57,30 @@ public class userController {
 		 * If you run on loacalhost:8080
 		 * http://localhost:8080/login?username=testuser1&password=password
 	     */
+		try {
 		
-		if(accountRepo.findByUsername(username).getUsername().equals(username) 
+				if(accountRepo.findByUsername(username).getUsername().equals(username) 
 				&& EncryptionDecryptionInstance.decrypt(accountRepo.findByUsername(username).getPassword()).equals(password)) {
-			Response = new response(true, "You successfully logged in!" );
-		}
+					Response = new response(true, "You successfully logged in!" );
+				}
+				
+				else {		
+				if(!EncryptionDecryptionInstance.decrypt(accountRepo.findByUsername(username).getPassword()).equals(password)) {
+					Response = new response(false,"password didn't match!");
+					}
+				}
+				return Response;
 		
-		else {		
-			if(!EncryptionDecryptionInstance.decrypt(accountRepo.findByUsername(username).getPassword()).equals(password)) {
-				Response = new response(false,"password didn't match!");
-			}
 		}
-		return Response;
+		catch (Exception e) {
+			return Response = new response(false,"Exception found");
+		}
 	}
 			
 	
 	
 	@RequestMapping(method = RequestMethod.POST, value= "/createAccount")
-	public response createAccount(@RequestBody account accountBody) {
+	public response create_account(@RequestBody account accountBody) {
 		/**
 	    http://localhost:8080/createAccount 
 		accountBody =>{
@@ -87,28 +92,33 @@ public class userController {
 			    "token": "A new account has been created"
 		}
 		 * */
+		try {
 		
-		String username = accountBody.getUsername();
-		String password = accountBody.getPassword();
-		if(username==null || password==null || username== "" || password=="") 
-		{Response = new response(false, "username or password not provided"); return Response;}
-		account accountEntity = accountRepo.findByUsername(username);
-		
-		if(accountEntity == null) {
-			String encrytedPass = EncryptionDecryptionInstance.encrypt(password);
-			account Account = new account(username, encrytedPass);
-			accountRepo.save(Account);
-			Response = new response(true, "A new account has been created");
+				String username = accountBody.getUsername();
+				String password = accountBody.getPassword();
+				if(username==null || password==null || username== "" || password=="") 
+				{Response = new response(false, "username or password not provided"); return Response;}
+				account accountEntity = accountRepo.findByUsername(username);
+				
+				if(accountEntity == null) {
+					String encrytedPass = EncryptionDecryptionInstance.encrypt(password);
+					account Account = new account(username, encrytedPass);
+					accountRepo.save(Account);
+					Response = new response(true, "A new account has been created");
+				}
+				else {Response = new response(false, "User already exist");}
+			
+				return Response;
 		}
-		else {Response = new response(false, "User already exist");}
-	
-		return Response;
+		catch (Exception e) {
+			return Response = new response(false,"Exception found");
+		}
 	
 	}
 	
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/update_password")
-	public response updateUser(@RequestBody account accountBody) {
+	@RequestMapping(method = RequestMethod.PUT, value = "/updatePassword")
+	public response update_user(@RequestBody account accountBody) {
 		/**
 		 * http://localhost:8080/update_password 
 		   accountBody =>{
@@ -120,36 +130,55 @@ public class userController {
 			    	"token": "password has been successfully updated"
 		   }
 		 * */
-		String username = accountBody.getUsername();
-		String password = accountBody.getPassword();
-		if(username==null || password==null || username== "" || password=="") 
-		{Response = new response(false, "username or password not provided"); return Response;}
-		
-		account accountEntity = accountRepo.findByUsername(username);
-		if(accountEntity!=null) {
-			accountEntity.setPassword(EncryptionDecryptionInstance.encrypt(password));
-			accountEntity.setUsername(username);
-			accountRepo.save(accountEntity);
-			Response = new response(true, "user account updated successfully");
+		try {
+				String username = accountBody.getUsername();
+				String password = accountBody.getPassword();
+				if(username==null || password==null || username== "" || password=="") 
+				{Response = new response(false, "username or password not provided"); return Response;}
+				
+				account accountEntity = accountRepo.findByUsername(username);
+				if(accountEntity!=null) {
+					accountEntity.setPassword(EncryptionDecryptionInstance.encrypt(password));
+					accountEntity.setUsername(username);
+					accountRepo.save(accountEntity);
+					Response = new response(true, "user account updated successfully");
+				}
+				else {Response = new response(false, "User does not exist");}
+				
+				return Response; 
 		}
-		else {Response = new response(false, "User does not exist");}
-		
-		return Response; 
+		catch (Exception e) {
+			return Response = new response(false,"Exception found");
 		}
+	}
 	
 	
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteUser")
-	public account deleteUser(@RequestParam String username) { 
+	public response delete_user(@RequestParam String username) { 
 		
-		account accountEntity = accountRepo.findByUsername(username);
-		accountRepo.delete(accountEntity);
-		return accountEntity;
+		try {
+			account accountEntity = accountRepo.findByUsername(username);
+			if(accountEntity == null) {return Response = new response(false,"No user found"); }
+			else {accountRepo.delete(accountEntity);return Response = new response(true,"Successfully deleted");}
+		}
+		catch (Exception e) {
+			return Response = new response(false,"Exception found");
+		}
+
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteAllUsers")
-	public void deleteAllUsers() { 
-		accountRepo.deleteAll();
+	public response delete_all_users() { 
+		try {
+			accountRepo.deleteAll();
+			return Response = new response(true,"Successfully deleted all users");}
+		catch (Exception e) {
+			return Response = new response(false,"Exception found");
+		}
+			
+			
+			
 	}
 	
 }

@@ -14,7 +14,7 @@ public class JavaApiSpringBootApplication {
 
 	//main
 	public static void main(String[] args) {
-		SpringApplication.run(JavaApiSpringBootApplication.class, args);
+		SpringApplication.run(JavaApiSpringBootApplication.class, args);	
 	}
 
 }
