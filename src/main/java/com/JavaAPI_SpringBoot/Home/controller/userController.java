@@ -57,7 +57,7 @@ public class userController {
 		/**
 		 * If you run on loacalhost:8080
 		 * http://localhost:8080/login?username=testuser1&password=password
-		 * */
+	     */
 		
 		if(accountRepo.findByUsername(username).getUsername().equals(username) 
 				&& EncryptionDecryptionInstance.decrypt(accountRepo.findByUsername(username).getPassword()).equals(password)) {
@@ -77,15 +77,15 @@ public class userController {
 	@RequestMapping(method = RequestMethod.POST, value= "/createAccount")
 	public response createAccount(@RequestBody account accountBody) {
 		/**
-		 * http://localhost:8080/createAccount 
-			 accountBody =>  {
-				    	"username":"testuser1",
-				    	"password":"password"
-			    		}
-					return/response => {
-					    "success": true,
-					    "token": "A new account has been created"
-						}
+	    http://localhost:8080/createAccount 
+		accountBody =>{
+				  	"username":"testuser1",
+			     	"password":"password"
+		}
+		return/response => {
+			    "success": true,
+			    "token": "A new account has been created"
+		}
 		 * */
 		
 		String username = accountBody.getUsername();
@@ -108,7 +108,18 @@ public class userController {
 	
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/update_password")
-	public response updateUser(@RequestBody account accountBody) { 
+	public response updateUser(@RequestBody account accountBody) {
+		/**
+		 * http://localhost:8080/update_password 
+		   accountBody =>{
+				   "username":"testuser1",
+				   "password":"new_password"
+		   }
+		   return/response => {
+					"success": true,
+			    	"token": "password has been successfully updated"
+		   }
+		 * */
 		String username = accountBody.getUsername();
 		String password = accountBody.getPassword();
 		if(username==null || password==null || username== "" || password=="") 
@@ -133,13 +144,11 @@ public class userController {
 		
 		account accountEntity = accountRepo.findByUsername(username);
 		accountRepo.delete(accountEntity);
-		
 		return accountEntity;
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value = "/deleteAllUsers")
 	public void deleteAllUsers() { 
-	
 		accountRepo.deleteAll();
 	}
 	
