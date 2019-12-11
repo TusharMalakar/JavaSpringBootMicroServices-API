@@ -35,32 +35,32 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
     private JwtAuthenticationEntryPoint entryPoint;
 	
-	@Bean
-    public AuthenticationManager authenticationManager() {
-        return new ProviderManager(Collections.singletonList(authenticationProvider));
-    }
+//	@Bean
+//    public AuthenticationManager authenticationManager() {
+//        return new ProviderManager(Collections.singletonList(authenticationProvider));
+//    }
 	
 	//creating  a Jwt customized filter
-	@Bean
-    public JwtAuthenticationTokenFilter authenticationTokenFilter() {
-        JwtAuthenticationTokenFilter filter = new JwtAuthenticationTokenFilter();
-        filter.setAuthenticationManager(authenticationManager());
-        filter.setAuthenticationSuccessHandler(new JwtSuccessHandler());
-        return filter;
-    }
+//	@Bean
+//    public JwtAuthenticationTokenFilter authenticationTokenFilter() {
+//        JwtAuthenticationTokenFilter filter = new JwtAuthenticationTokenFilter();
+//        filter.setAuthenticationManager(authenticationManager());
+//        filter.setAuthenticationSuccessHandler(new JwtSuccessHandler());
+//        return filter;
+//    }
 	
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.csrf().disable()            //disabled all cross http requests
-                .authorizeRequests().antMatchers("**/api/**").authenticated()   //check authentication all url has substring "api"
-                .and()
-                .exceptionHandling().authenticationEntryPoint(entryPoint)      // exception for url doesn't have substring "api"
-                .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); //stateless management
-
-        http.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-        http.headers().cacheControl();     //cache controller
+//        http.csrf().disable()            //disabled all cross http requests
+//                .authorizeRequests().antMatchers("**/api/**").authenticated()   //check authentication all url has substring "api"
+//                .and()
+//                .exceptionHandling().authenticationEntryPoint(entryPoint)      // exception for url doesn't have substring "api"
+//                .and()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); //stateless management
+//
+//        http.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+//        http.headers().cacheControl();     //cache controller
 
     }
 	
